@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="Normal/base::layout(~{::section})">
+<head>
+</head>
+<body>
+	<section>
+
+  <div class="container">
+  	<div class="card text-center">
+  		<div class ="card-body">
+  		<div class="container text-center">
+  		<img style="height: 200px; width: 200px;" class="my_profile_picture" src=""
+								th:src="@{'/img/scm.png'}" alt="profile" /> 
+  		</div>
+  			<h1>Smart Contact Manager</h1>
+  			<h2 class="mt-3 text-secondary font-italic font-weight-light">Start Adding your contacts here</h2>
+  		</div>
+  		<a href="#" th:href="@{'/user/add-contact'}"	class="btn btn-primary btn-block">Add Contact</a>
+  	</div>
+  </div>
+  
+  <script>
+  	$('.item').removeClass('side-active');
+  	$('#home-link').addClass('side-active');
+  </script>
+	</section>
+
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="Normal/base::layout(~{::section})">
+<head>
+</head>
+<body>
+	<section>
+		<div class="card" th:if="${contact}">
+			<div class="card-body">
+				<div class="container-fluid">
+					<form action="" th:action="@{/user/process-contact-update}"
+						th:object="${contact}" enctype="multipart/form-data" class="mt-2"
+						method="POST">
+
+						<div class="row">
+							<div class="col-md-8">
+								<input type="hidden" name="cid" th:value="${contact.cid}" />
+								<div class="input-group">
+									<div class="input-group-text">
+										<i class="fa fa-plus"></i>
+									</div>
+								
+									<input type="text" name="name" id="name"
+										th:value="${contact.name}" required
+										placeholder="Enter the name here" class="form-control"
+										th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}" />
+
+
+
+									<div class="invalid-feedback"
+										th:each="e: ${#fields.errors('name')}" th:text="${e}"></div>
+								</div>
+
+
+
+								<div class="input-group mt-2">
+									<div class="input-group-text">
+										<i class="fas fa-user-alt"></i>
+									</div>
+									<input type="text" name="nickname" required id="nickname"
+										th:value="${contact.nickname}"
+										placeholder="Enter the nickname here" class="form-control" />
+
+
+
+								</div>
+
+
+
+								<div class="input-group mt-2">
+									<div class="input-group-text">
+										<i class="fa fa-phone"></i>
+									</div>
+									<input type="number" name="phone" required id="phone"
+										th:value="${contact.phone}"
+										placeholder="Enter the mobile number here"
+										class="form-control"
+										th:classappend="${#fields.hasErrors('phone') ? 'is-invalid' : ''}" />
+									<div class="invalid-feedback"
+										th:each="e: ${#fields.errors('phone')}" th:text="${e}">
+									</div>
+								</div>
+								<div class="input-group mt-2">
+									<div class="input-group-text">@</div>
+									<input type="email" required name="email" id="email"
+										th:value="${contact.email}"
+										placeholder="Enter the email id here" class="form-control"
+										th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}" />
+									<div class="invalid-feedback"
+										th:each="e: ${#fields.errors('email')}" th:text="${e}">
+									</div>
+								</div>
+
+
+
+								<div class="input-group mt-2">
+									<div class="input-group-text">
+										<i class="fa fa-briefcase"></i>
+									</div>
+									<input type="text" name="work" id="work"
+										th:value="${contact.work}" placeholder="Enter the work here"
+										class="form-control" />
+
+
+
+								</div>
+
+
+
+								<div class="form-group mt-2">
+									<textarea id="mytextarea"
+										placeholder="Enter contact description"
+										th:text="${contact.description}" name="description"
+										class="form-control" rows="8"></textarea>
+
+
+
+								</div>
+								<br>
+
+
+
+							</div>
+							<div class="col-md-4 text-center">
+								<h2 class="text-center" style="padding-bottom: 3%"
+									th:text="${contact.name}"></h2>
+
+
+
+								<img class="contact_image img-fluid" alt="" src=""
+									th:src="@{'/img/' + ${contact.image}}">
+
+
+
+								<div class="text-center custom-file ml-5 mt-4">
+									<input type="file" name="profileImage" id="profileImage" />
+								</div>
+
+
+
+								<div style="padding: 10%;">
+
+
+
+									<div class="container text-center mt-2">
+										<button class="btn bg-primary text-white" type="Submit">UPDATE</button>
+										<a class="btn bg-danger text-white" href="#"
+											th:href="@{'/user/'+${contact.cid}+'/contact'}"> CANCEL</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div th:unless="${contact}" class="card bg-danger mr-3">
+			<div class="card-body">
+				<h2 class="text-center text-white">Oops... You are not
+					authorized to view this contact</h2>
+			</div>
+		</div>
+
+		<script
+			src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js"
+			referrerpolicy="origin"></script>
+
+		<script>
+			tinymce.init({
+				selector : '#mytextarea'
+			});
+		</script>
+
+	</section>
+
+</body>
+
+</html>
